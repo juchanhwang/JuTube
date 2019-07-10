@@ -42,5 +42,5 @@ app.listen(PORT, handleListening);
 
 ## #2.5 ES6 on NodeJS using Babel
 
-
+> 프로젝트에 필요없는  dependency는 `npm install nodemon -D` 뒤에 `-D` 를 붙여준다. 개발자에게 필요한 devDependencies에 저장한다. 
 
