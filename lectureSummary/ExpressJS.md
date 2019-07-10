@@ -36,4 +36,11 @@ app.get("/profile", handleProfile);
 app.listen(PORT, handleListening);
 ```
 
->
+
+
+
+
+## #2.5 ES6 on NodeJS using Babel
+
+
+
