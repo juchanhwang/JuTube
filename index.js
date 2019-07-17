@@ -1,4 +1,5 @@
 import express from "express";
+import morgan from "morgan";
 // const express = require("express");
 
 const app = express();
@@ -18,11 +19,10 @@ const betweenHome = (req, res, next) => {
   next();
 };
 
-// app.use(betweenHome);
+app.use(morgan("dev"));
 
-app.get("/",betweenHome, handleHome);
+app.get("/", handleHome);
 
 app.get("/profile", handleProfile);
-
 
 app.listen(PORT, handleListening);

@@ -54,4 +54,35 @@ express에서 middleware란 처리가 끝날 때까지 연결되어 있는 것�
 
 - request가 어떻게 되는가
   - 웹 사이트에 접근하려고하는 순간이 시작
-- 유저의 home(/) 요청과 handleHome 사이에 있는 것 request한 것에 대한 권한 또한 필요하다. 요청을 처리할 수 있는 권한을 줘야함 ==> next()
+
+- 유저와 마지막 응답 사이에 middelware가 존재한다. express에서의 모든 함수는 middleware가 될 수 있음
+
+```js
+const handleHome = (req, res) => res.send("Hello from home");
+const handleProfile = (req, res) => res.send("You are on my profile");
+const betweenHome = () => console.log("between");
+
+app.get("/",betweenHome, handleHome);
+app.get("/profile", handleProfile);
+app.listen(PORT, handleListening);
+```
+
+- 유저의 home(/) 요청과 handleHome 사이에 있는 것 request한 것에 대한 권한 또한 필요하다
+- 요청을 처리할 수 있는 권한을 줘야함 ==> next()
+
+
+
+```js
+const handleHome = (req, res, next) => res.send("Hello from home");
+const handleProfile = (req, res, next) => res.send("You are on my profile");
+const betweenHome = (req, res, next) => {
+  console.log("between");
+  next();
+};
+
+app.get("/",betweenHome, handleHome);
+app.get("/profile", handleProfile);
+app.listen(PORT, handleListening);
+```
+
+> express의 모든 route에서 connection을 다루는 것은 request, response, 그리고 next를 갖고 있다.
